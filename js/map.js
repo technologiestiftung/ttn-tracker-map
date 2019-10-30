@@ -1,5 +1,12 @@
 /* eslint-disable no-undef */
 
+require("babel-core/register");
+require("babel-polyfill");
+const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
+
+const main = async ()=>{
+
+
 const serverUrl = 'https://bnjmn.uber.space';
 mapboxgl.accessToken = 'pk.eyJ1IjoiYm5qbW5zYmwiLCJhIjoiY2luc3Qxajk4MDBsY3Zza2x1MWg1b2xzeCJ9.BK1MmHruCVZvMFnL_uTC1w';
 
@@ -35,13 +42,14 @@ var start = [52.52437, 13.41053];
 
 // +++ function to user location on the map (blue dot) +++
 // +++  important: only works within save environment (https or localhost) +++
-map.addControl(geoLocate = new mapboxgl.GeolocateControl({
+const geoLocate = new mapboxgl.GeolocateControl({
   positionOptions: {
       enableHighAccuracy: true
   },
   trackUserLocation: true,
   showUserLocation: true
-}));
+})
+map.addControl(geoLocate);
 
 // +++ zoom in part
 // +++ prperty center has to be nodeCoords
@@ -453,3 +461,9 @@ function findLastValidCoords(arr) {
   }
 }
 
+
+}
+
+main().catch(err =>{
+  console.error(err);
+})
