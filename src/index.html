@@ -16,15 +16,36 @@
     />
   </head>
 
+  <body>
+    <!-- Preloader -->
+
+    <div id="preloader">
+      <div class="pre-container">
+          <div class="spinner">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+          </div>
+          <h1 style="margin-top: -4em; color: #11119f;">map is loading ...</h1>  
+      </div>
+    </div>
+
+    <!-- end Preloader -->   
+
 
   <body>
     <div class="sidebar"> 
           <div class="menu">
+            <h1 style="font-size: 30px !important; margin-top: 1.2em;letter-spacing: 0.05em;">WHERE IS</h1>
+            <h1
+            class="txt-rotate"
+            data-period="2000"
+            data-rotate='[ "MY BIKE?", "MY CAR?", "... LARS?"]'>
+          </h1>
               <div class="trackerDropdown">
                 <button id="dropdownCtrl" class="menuBtn">Track me to &#x2003; &#x27EB; &#x27EB; &#x27EB;</button>
                     <div id="trackerDropdown" class="dropdown-content">
                         <a id="TSB" href="#">Technologiestiftung Berlin</a>
-                        <a id="activeNode" href="#">Active GPS-node</a>
+                        <a id="activeNode" href="#">Lars</a>
                     </div>
               </div>
 
@@ -73,12 +94,11 @@
         <a class="navbar-item" href="https://www.citylab-berlin.org" target="_blank">
           <img class="lablogo" src="./images/citylab-logo.png">
         </a>
-        <button id='zoomBtn'>Zoom to active GPS-node</button>
+        <button id='zoomBtnBg'></button>
+        <button id='zoomBtn'>ZOOM TO LARS</button>
       </nav>
     </div>
 
     <script src="main.js"></script>
-
-
   </body>
 </html>

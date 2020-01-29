@@ -52,31 +52,31 @@ export function getRoute(end) {
     //   map.getSource('route').setData(geojson);
     // } else {
     //   // otherwise, make a new request
-      map.addLayer({
-        id: 'route',
-        type: 'line',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'LineString',
-              coordinates: geojson,
-            },
+    map.addLayer({
+      id: 'route',
+      type: 'line',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: geojson,
           },
         },
-        layout: {
-          'line-join': 'round',
-          'line-cap': 'round',
-        },
-        paint: {
-          'line-color': '#11119f',
-          'line-width': 5,
-          'line-opacity': 0.65,
-        },
-      });
-    
+      },
+      layout: {
+        'line-join': 'round',
+        'line-cap': 'round',
+      },
+      paint: {
+        'line-color': '#11119f',
+        'line-width': 5,
+        'line-opacity': 0.65,
+      },
+    });
+
     // add turn instructions here at the end
   };
   req.send();
