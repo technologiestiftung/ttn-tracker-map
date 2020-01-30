@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     pitch: 45, //angle from plane view
   });
 
-
   // PRELOADER -----
   const preloader = document.getElementById('preloader');
   // cuz map is rendered AFTER listener is called, we use 'idle'
@@ -99,13 +98,13 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
 
-  // set bounds of the map
+  // set bounds of the map -----
   map.setMaxBounds([[-180, -85], [180, 85]]);
 
-  // initialize the map canvas
+  // initialize the map canvas -----
   var canvas = map.getCanvasContainer();
 
-  // initalize a starting point for routing
+  // initalize a starting point for routing -----
   const start = [13.388443, 52.4839];
 
   // ++++ THIS WEHRE ROUTING FUNCTION STARTS ++++
@@ -290,7 +289,7 @@ document.addEventListener('DOMContentLoaded', function() {
       map.getSource('end').setData(tsb);
       getRoute(tsbCoords);
 
-      // display distance in div
+      // display distance in div -----
       let trackerDist = document.getElementById('distance');
       // HARD CODED DISTANCE !!!
       let el = 3.56 + ' km';
@@ -298,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
         trackerDist.innerHTML = '<p>' + el + '</p>';
       }
 
-      // override distance if already existing
+      // override distance if already existing ----
       else {
         while (trackerDist.firstChild) {
           trackerDist.removeChild(trackerDist.firstChild);
@@ -306,13 +305,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
 
-      // HARD CODED DURATION
+      // HARD CODED DURATION -----
       let trackerDur = document.getElementById('duration');
       let el2 = 16 + ' min ' + 8 + ' sec';
       if (el2 !== undefined) {
         trackerDur.innerHTML = '<p>' + el2 + '</p>';
       }
-      // override distance if already existing
+      // override distance if already existing -----
       else {
         while (trackerDur.firstChild) {
           trackerDur.removeChild(trackerDur.firstChild);
@@ -343,7 +342,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     getRoute(coords);
 
-    // +++ GET DURATION AND DISTANCE
+    // +++ ROUTING ENDS --------
+
+    // +++ GET DURATION AND DISTANCE --------
     let url2 =
       'http://osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
       start[0] +
