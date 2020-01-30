@@ -107,7 +107,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // initalize a starting point for routing -----
   const start = [13.388443, 52.4839];
 
+
   // ++++ THIS WEHRE ROUTING FUNCTION STARTS ++++
+
   function getRoute(end) {
     // make a directions request using cycling profile
     // start will always be the GPSnode -- only the end or destination will change
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //   mapboxgl.accessToken;
 
     let url2 =
-      'http://osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
+      '//osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
       start[0] +
       ',' +
       start[1] +
@@ -342,11 +344,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     getRoute(coords);
 
-    // +++ ROUTING ENDS --------
+    // +++ GET DURATION AND DISTANCE --------
 
     // +++ GET DURATION AND DISTANCE --------
     let url2 =
-      'http://osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
+      '//osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
       start[0] +
       ',' +
       start[1] +
