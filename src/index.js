@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //   mapboxgl.accessToken;
 
     let url2 =
-      '//osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
+      'http://osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
       start[0] +
       ',' +
       start[1] +
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // +++ GET DURATION AND DISTANCE --------
     let url2 =
-      '//osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
+      'http://osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
       start[0] +
       ',' +
       start[1] +
