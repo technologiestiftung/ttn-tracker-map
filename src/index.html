@@ -35,7 +35,7 @@
   <body>
     <div class="sidebar"> 
           <div class="menu">
-            <h1 style="font-size: 30px !important; margin-top: 1.2em;letter-spacing: 0.05em;">WHERE IS</h1>
+            <h1 style="font-size: 30px !important; margin-top: 2.2em;letter-spacing: 0.05em;">WHERE IS</h1>
             <h1
             class="txt-rotate"
             data-period="2000"
@@ -45,16 +45,30 @@
                 <button id="dropdownCtrl" class="menuBtn">Track me to &#x2003; &#x27EB; &#x27EB; &#x27EB;</button>
                     <div id="trackerDropdown" class="dropdown-content">
                         <a id="TSB" href="#">Technologiestiftung Berlin</a>
-                        <a id="activeNode" href="#">Lars</a>
+                        <!-- <a id="activeNode" href="#">Lars</a> -->
                     </div>
               </div>
-
+              <!-- trackerInfo is dynamically generated content -->
+              <div id="trackerInfo">
+                <div class="trackerDistance">
+                  <p id="highway">&#x1F6E3;</p>
+                  <div id="distance">
+                    <p>0 km</p>
+                  </div>
+                </div>
+                <div class="trackerDuration">
+                  <p id="bike"> &#x1F6B2;</p>
+                  <div id="duration">
+                  <p >0 min 0 sec</p>
+                  </div>
+                </div>
+              </div>
               <div id="overlay">
                 <div class="headerSidebar">
                   <a href="javascript:void(0)" id="closebtn">&times;</a>
                   <h1>About</h1>
                   <div id="overlayText">
-                    <p>Du hast ein Funkloch? Kein Problem!
+                    <p>Du hast ein Funkloch?<br>Kein Problem!
                       <br></br>
                       Die Tracker dieser Web-App nutzen das sogenannte LoRaWan um ihre GPS-Koordinaten zu übertragen.
                       <br></br>
@@ -71,22 +85,8 @@
               <span id="slash">|</span>
               <span id="impressum">Impressum</span>
             </div>
-          </div> 
-<!-- trackerInfo is dynamically generated content -->
-          <div id="trackerInfo">
-            <div class="trackerDistance">
-              <p id="highway">&#x1F6E3;</p>
-              <div id="distance">
-                <p>0 km</p>
-              </div>
-            </div>
-            <div class="trackerDuration">
-              <p id="bike"> &#x1F6B2;</p>
-              <div id="duration">
-              <p >0 min 0 sec</p>
-              </div>
-            </div>
           </div>
+
     </div>
 
     <div id="map">
@@ -94,7 +94,7 @@
         <a class="navbar-item" href="https://www.citylab-berlin.org" target="_blank">
           <img class="lablogo" src="./images/citylab-logo.png">
         </a>
-        <button id='zoomBtnBg'></button>
+        <!-- <button id='zoomBtnBg'></button> -->
         <button id='zoomBtn'>ZOOM TO LARS</button>
       </nav>
     </div>

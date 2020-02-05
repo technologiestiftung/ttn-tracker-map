@@ -1,6 +1,6 @@
 
 .marker {
-    background-image: url("https://www.oseberg.fr/wp-content/uploads/2017/11/cropped-favicon.png");
+    background-image: url('/images/cropped-favicon.ico');
     background-size: cover;
     width: 30px;
     height: 30px;
@@ -15,8 +15,34 @@ max-width: 140px;
 .mapboxgl-popup-content {
 text-align: center;
 font-family: 'Open Sans', sans-serif;
+border-radius: 5px;
+background-color: var(--lightmag);
+color: white;
 }
 
 .mapboxgl-popup-content p {
     font-size: 12px !important;
 }
+
+.mapboxgl-popup-close-button {
+  top: 0.4em;
+  color: white;
+}
+
+/* Popup Tip has several classes */
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+    border-bottom-color: var(--lightmag);
+    }
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+    border-top-color: var(--lightmag);
+    }
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: var(--lightmag);
+    }
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: var(--lightmag);
+    }

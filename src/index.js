@@ -9,6 +9,7 @@ import { dropdownOpen } from './lib/dropdownOpen';
 import { dropdownClose } from './lib/dropdownClose';
 import { openImpressum } from './lib/openImpressum';
 import { overlay } from './lib/aboutOverlay';
+import { middlePoint } from './lib/midpoint.js';
 
 // import { loadOverlay } from '.lib/loadlayer.js';
 import './css/style.css';
@@ -95,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     css.innerHTML = '.txt-rotate > .wrap { border-right: 0.08em solid #666 }';
     document.body.appendChild(css);
   };
+  //--- TEXT ROTATION END
 
   // set bounds of the map -----
   map.setMaxBounds([[-180, -85], [180, 85]]);
@@ -103,28 +105,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var canvas = map.getCanvasContainer();
 
   // initalize a starting point for routing -----
-  const start = [13.388443, 52.4839];
+  const start = [13.388443, 52.4839]; //CityLAB
 
   // ++++ THIS WEHRE ROUTING FUNCTION STARTS ++++
 
   function getRoute(end) {
-    // make a directions request using cycling profile
-    // start will always be the GPSnode -- only the end or destination will change
-    const start = [13.388443, 52.4839];
-    console.log('Starting point: ', start);
-
-    // very depressing Mapbox GL API --> not working!
-    // var url =
-    //   'https://api.mapbox.com/directions/v5/mapbox/cycling/' +
-    //   start[0] +
-    //   ',' +
-    //   start[1] +
-    //   ';' +
-    //   end[1] +
-    //   ',' +
-    //   end[0] +
-    //   '?steps=true&geometries=geojson&access_token=' +
-    //   mapboxgl.accessToken;
+    const start = [13.388443, 52.4839]; //CityLAB
 
     const data = {
       type: 'bicycle',
@@ -134,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let url2 = 'https://osrm-middleware.now.sh/api';
     fetch(url2, {
-      method: 'POST', //default would be GET
+      method: 'POST',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
@@ -146,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return response.json();
       })
       .then((myJson) => {
-        console.log('myJson: ', myJson);
         var parsedJson = JSON.parse(myJson); //parse before using JSON
         let route = parsedJson.routes[0].geometry.coordinates;
         var geojson = {
@@ -195,37 +180,36 @@ document.addEventListener('DOMContentLoaded', function() {
   map.on('click', function(e) {
     getRoute(start);
     // Add starting point to the map
-    map.addLayer({
-      id: 'startingpoint',
-      type: 'circle',
-      source: {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              properties: {},
-              geometry: {
-                type: 'Point',
-                coordinates: start,
-              },
-            },
-          ],
-        },
-      },
-      paint: {
-        'circle-radius': 0,
-        'circle-color': '#ff6464',
-      },
-    });
+    // map.addLayer({
+    //   id: 'startingpoint',
+    //   type: 'circle',
+    //   source: {
+    //     type: 'geojson',
+    //     data: {
+    //       type: 'FeatureCollection',
+    //       features: [
+    //         {
+    //           type: 'Feature',
+    //           properties: {},
+    //           geometry: {
+    //             type: 'Point',
+    //             coordinates: start,
+    //           },
+    //         },
+    //       ],
+    //     },
+    //   },
+    //   paint: {
+    //     'circle-radius': 0,
+    //     'circle-color': '#ff6464',
+    //   },
+    // });
 
     let coordsObj = e.lngLat;
     canvas.style.cursor = '';
     let coords = Object.keys(coordsObj).map(function(key) {
       return coordsObj[key];
     });
-    console.log('Koordinaten destination: ', coords);
     let end = {
       type: 'FeatureCollection',
       features: [
@@ -239,7 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
         },
       ],
     };
-    console.log('end: ', end);
     if (map.getLayer('end')) {
       map.getSource('end').setData(end);
     } else {
@@ -268,81 +251,17 @@ document.addEventListener('DOMContentLoaded', function() {
         },
       });
     }
-
-    // add eventListener for Technologiestiftung
-    let tsb = document.getElementById('TSB');
-    tsb.addEventListener('click', function() {
-      let tsbCoords = [13.3425879, 52.4886385];
-      let tsb = {
-        type: 'FeatureCollection',
-        features: [
-          {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'Point',
-              coordinates: tsbCoords,
-            },
-          },
-        ],
-      };
-      map.getSource('end').setData(tsb);
-      getRoute(tsbCoords);
-
-      // display distance in div -----
-      let trackerDist = document.getElementById('distance');
-      // HARD CODED DISTANCE !!!
-      let el = 3.56 + ' km';
-      if (el !== undefined) {
-        trackerDist.innerHTML = '<p>' + el + '</p>';
-      }
-
-      // override distance if already existing ----
-      else {
-        while (trackerDist.firstChild) {
-          trackerDist.removeChild(trackerDist.firstChild);
-          trackerDist.innerHTML = '<p>' + el + '</p>';
-        }
-      }
-
-      // HARD CODED DURATION -----
-      let trackerDur = document.getElementById('duration');
-      let el2 = 16 + ' min ' + 8 + ' sec';
-      if (el2 !== undefined) {
-        trackerDur.innerHTML = '<p>' + el2 + '</p>';
-      }
-      // override distance if already existing -----
-      else {
-        while (trackerDur.firstChild) {
-          trackerDur.removeChild(trackerDur.firstChild);
-          trackerDur.innerHTML = '<p>' + el2 + '</p>';
-        }
-      }
-    });
-
-    // add eventListener for active node
-    let activeNode = document.getElementById('activeNode');
-    activeNode.addEventListener('click', async function() {
-      let nodeCoords = await getData(serverUrl);
-      let node = {
-        type: 'FeatureCollection',
-        features: [
-          {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-              type: 'Point',
-              coordinates: nodeCoords,
-            },
-          },
-        ],
-      };
-      map.getSource('end').setData(node);
-      getRoute(nodeCoords);
-    });
     getRoute(coords);
-
-    // +++ GET DURATION AND DISTANCE --------
+    // midppoint calculation
+    let lat1 = start[1];
+    let long1 = start[0];
+    let lat2 = coords[1];
+    let long2 = coords[0];
+    let tmp = middlePoint(lat1, long1, lat2, long2);
+    map.flyTo({
+      center: tmp,
+      zoom: 13.5,
+    });
 
     // +++ GET DURATION AND DISTANCE --------
     let url2 =
@@ -409,8 +328,101 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     doAjax();
+    //+++ THIS IS WHERE DURATION & DISTANCE ENDS
   });
-  // ++++ THIS IS WHERE ROUTING FUNCTION ENDS ++++
+
+  //+++ ROUTING MAP ENDS
+
+  //+++ add eventListener for Technologiestiftung
+  let tsb = document.getElementById('TSB');
+  tsb.addEventListener('click', function() {
+    getRoute(start);
+    let tsbCoords = [13.3425879, 52.4886385];
+    let tsb = {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Point',
+            coordinates: tsbCoords,
+          },
+        },
+      ],
+    };
+    if (map.getLayer('end')) {
+      map.getSource('end').setData(tsb);
+    } else {
+      map.addLayer({
+        id: 'end',
+        type: 'circle',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: [
+              {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'Point',
+                  coordinates: tsbCoords,
+                },
+              },
+            ],
+          },
+        },
+        paint: {
+          'circle-radius': 8,
+          'circle-color': '#11119f',
+        },
+      });
+    }
+    getRoute(tsbCoords);
+    // midppoint calculation
+    let lat1 = start[1];
+    let long1 = start[0];
+    let lat2 = tsbCoords[1];
+    let long2 = tsbCoords[0];
+    let temp = middlePoint(lat1, long1, lat2, long2);
+    map.flyTo({
+      center: temp,
+      zoom: 13.5,
+    }); // END EVENT LISTENER
+
+    // display distance in div -----
+    let trackerDist = document.getElementById('distance');
+    // HARD CODED DISTANCE !!!
+    let el = 3.56 + ' km';
+    if (el !== undefined) {
+      trackerDist.innerHTML = '<p>' + el + '</p>';
+    }
+
+    // override distance if already existing ----
+    else {
+      while (trackerDist.firstChild) {
+        trackerDist.removeChild(trackerDist.firstChild);
+        trackerDist.innerHTML = '<p>' + el + '</p>';
+      }
+    }
+
+    // HARD CODED DURATION -----
+    let trackerDur = document.getElementById('duration');
+    let el2 = 16 + ' min ' + 8 + ' sec';
+    if (el2 !== undefined) {
+      trackerDur.innerHTML = '<p>' + el2 + '</p>';
+    }
+    // override distance if already existing -----
+    else {
+      while (trackerDur.firstChild) {
+        trackerDur.removeChild(trackerDur.firstChild);
+        trackerDur.innerHTML = '<p>' + el2 + '</p>';
+      }
+    }
+  });
+
+  // ++++ THIS IS WHERE ROUTING FUNCTION FOR EVENT LISTENER ENDS ++++
 
   //+++ FUNCTIONS
   // +++ geojson to add markers to the map

@@ -3,8 +3,8 @@ export function overlay() {
   let modalText = document.getElementById('overlayText');
   let close = document.getElementById('closebtn');
 
-  modal.style.display = 'block';
-  modalText.style.display = 'block';
+  modal.style.display = 'flex';
+  modalText.style.display = 'flex';
 
   window.onclick = function(event){
     if (event.target == close) {

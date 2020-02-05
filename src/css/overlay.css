@@ -1,21 +1,16 @@
 #overlay {
   display: none;
-  position: absolute;
-  margin-left: 11%;
-  top: 0;
+  position: relative;
+  margin: 30% 10%;
   width: 80%;
-  height: 90%;
+  max-height: 50%;
   z-index: 1;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 1); /*dim the background*/
   box-shadow: rgba(44, 48, 59, 0.1) 0px 2px 3px 0px;
 }
 
 #overlay a {
-    padding: 6px 12px 0 0;
-    text-decoration: none;
+    padding: 6px ;
     right: 0;
-    font-size: 20px !important;
     color: var(--darkgrey);
     display: block;
     text-align: right;
@@ -29,34 +24,39 @@
 .headerSidebar {
   position: absolute;
   width: 100%;
-  height: 3.2em;
+  height: 4em;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
-  background: var(--grey);
+  background: var(--magenta);
 }
 
+/* only for function */
 #overlayText {
   display: none;
-  position: relative;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: rgba(255, 255, 255, 1); /*dim the background*/
 }
 
 #overlayText p {
-    position: absolute;
+    display: inline;
+    position: relative;
     padding-left: 1em;
     padding-right: 1em;
-    padding-top: 50%;
-    width: 84%;
-    font-size: 12px !important;
+    min-height: 50%;
+    width: 90%;
+    font-size: 14px !important;
     color: var(--blue);
     text-align: center;
-    font-weight: bolder;
+    font-weight: 500;
+    display: inline-bock;
 }
 
 .headerSidebar h1 {
-  position: relative;
   top: 4%;
   text-align: center;
   color: rgba(255, 255, 255, 1);
+  margin: 1em;
 }
 
 .headerSidebar p {
@@ -70,6 +70,10 @@ a#closebtn {
   z-index: 1;
   padding: 0.3em 0.5em;
   float: right;
+  color: white;
+}
+a#closebtn:hover {
+  color: var(--lightmag);
 }
 
 .show {

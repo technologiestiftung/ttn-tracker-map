@@ -50,22 +50,21 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 20%;
 }
 
 .menuBtn {
     display: flex;
+    justify-content: center;
     max-width: 14em;
     padding: 2em 2.5em; 
     border: none;
     border-radius: 5px;
-    justify-content: center;
     align-items: center;
     color: var(--lightmag);
     background: white;
     box-shadow: rgba(44, 48, 59, 0.1) 0px 2px 3px 0px;
     transition: 0.3s;
-    margin-top: 2em;
+    margin-top: 4em;
 }
 
 .menuBtn:hover {
@@ -75,15 +74,17 @@ h1 {
 }
 
 #trackerInfo {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2.2em;
+    margin-top: 2em;
 }
 
 
 #trackerInfo p {
     color: white;
-    font-size: 16px !important;
+    font-size: 20px !important;
     font-weight: bold;
     text-align: center;
 }
@@ -104,12 +105,12 @@ h1 {
 }
 
 .trackerDistance {
-    display: block;
-    margin-top: 16em;
+    margin-top: 1em;
 }
+
 .trackerDuration {
-    display: block;
-}
+    margin-top: 4em;
+} 
 
 
 #navbar {
@@ -176,7 +177,7 @@ h1 {
 
 
 .footer{
-    position: fixed;
+    position: fixed;    
     text-align: center;
     bottom: 0;
     height: 8%;
@@ -186,8 +187,6 @@ h1 {
 
 .wrapper {
     display: flex;
-    justify-content: center;
-    left: 0;
     padding-left: 2.2em;
     padding-right: 3.6em;
 }
