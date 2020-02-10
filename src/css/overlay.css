@@ -44,8 +44,8 @@
     padding-left: 1em;
     padding-right: 1em;
     min-height: 50%;
-    width: 90%;
-    font-size: 14px !important;
+    max-width: 90%;
+    font-size: 1em !important;
     color: var(--blue);
     text-align: center;
     font-weight: 500;

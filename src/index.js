@@ -132,7 +132,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return response.json();
       })
       .then((myJson) => {
+        console.log(myJson);
         var parsedJson = JSON.parse(myJson); //parse before using JSON
+        let distance = parsedJson.distance;
+        let duration = parsedJson.duration;
         let route = parsedJson.routes[0].geometry.coordinates;
         var geojson = {
           type: 'Feature',
@@ -172,38 +175,86 @@ document.addEventListener('DOMContentLoaded', function() {
             },
           });
         }
+        // +++ GET DURATION AND DISTANCE --------
+
+        let temp = distance / 1000;
+        distance = temp.toFixed(2);
+        const hours = Math.floor(duration / 3600);
+        const minutes = Math.floor((duration % 3600) / 60);
+        const seconds = Math.floor(duration % 60);
+
+        console.log('Entfernung: ', distance);
+        console.log(
+          'Stunden:',
+          hours,
+          'Minuten: ',
+          minutes,
+          'Sekunden: ',
+          seconds
+        );
+
+        // display distance in div
+        let trackerDist = document.getElementById('distance');
+        let el = distance + ' km';
+        if (el !== undefined) {
+          trackerDist.innerHTML = '<p>' + el + '</p>';
+        }
+        // override distance if already existing
+        else {
+          while (trackerDist.firstChild) {
+            trackerDist.removeChild(trackerDist.firstChild);
+            trackerDist.innerHTML = '<p>' + el + '</p>';
+          }
+        }
+
+        // display duration in div
+        let trackerDur = document.getElementById('duration');
+        let el2 = minutes + ' min ' + seconds + ' sec';
+        if (el2 !== undefined) {
+          trackerDur.innerHTML = '<p>' + el2 + '</p>';
+        }
+        // override distance if already existing
+        else {
+          while (trackerDur.firstChild) {
+            trackerDur.removeChild(trackerDur.firstChild);
+            trackerDur.innerHTML = '<p>' + el2 + '</p>';
+          }
+        }
+        //+++ THIS IS WHERE DURATION & DISTANCE ENDS
       });
     // add turn instructions here at the end
     // SEND REQUEST
   }
+  //+++ this is where the routing function ends +++
 
   map.on('click', function(e) {
     getRoute(start);
+
     // Add starting point to the map
-    // map.addLayer({
-    //   id: 'startingpoint',
-    //   type: 'circle',
-    //   source: {
-    //     type: 'geojson',
-    //     data: {
-    //       type: 'FeatureCollection',
-    //       features: [
-    //         {
-    //           type: 'Feature',
-    //           properties: {},
-    //           geometry: {
-    //             type: 'Point',
-    //             coordinates: start,
-    //           },
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   paint: {
-    //     'circle-radius': 0,
-    //     'circle-color': '#ff6464',
-    //   },
-    // });
+    map.addLayer({
+      id: 'startingpoint',
+      type: 'circle',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [
+            {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'Point',
+                coordinates: start,
+              },
+            },
+          ],
+        },
+      },
+      paint: {
+        'circle-radius': 0,
+        'circle-color': '#ff6464',
+      },
+    });
 
     let coordsObj = e.lngLat;
     canvas.style.cursor = '';
@@ -223,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
       ],
     };
+
     if (map.getLayer('end')) {
       map.getSource('end').setData(end);
     } else {
@@ -262,75 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
       center: tmp,
       zoom: 13.5,
     });
-
-    // +++ GET DURATION AND DISTANCE --------
-    let url2 =
-      'http://osrm-docker-bikesharing-dev2.eu-central-1.elasticbeanstalk.com/route/v1/bicycle/' +
-      start[0] +
-      ',' +
-      start[1] +
-      ';' +
-      coords[0] +
-      ',' +
-      coords[1] +
-      '?geometries=geojson';
-
-    async function doAjax() {
-      try {
-        const res = await fetch(url2);
-        const data = await res.json();
-        let temp = data.routes[0].distance / 1000;
-        const distance = temp.toFixed(2);
-        const duration = data.routes[0].duration;
-        const hours = Math.floor(duration / 3600);
-        const minutes = Math.floor((duration % 3600) / 60);
-        const seconds = Math.floor(duration % 60);
-
-        console.log('Entfernung: ', distance);
-        console.log(
-          'Stunden:',
-          hours,
-          'Minuten: ',
-          minutes,
-          'Sekunden: ',
-          seconds
-        );
-
-        // display distance in div
-        let trackerDist = document.getElementById('distance');
-        let el = distance + ' km';
-        if (el !== undefined) {
-          trackerDist.innerHTML = '<p>' + el + '</p>';
-        }
-        // override distance if already existing
-        else {
-          while (trackerDist.firstChild) {
-            trackerDist.removeChild(trackerDist.firstChild);
-            trackerDist.innerHTML = '<p>' + el + '</p>';
-          }
-        }
-
-        // dispplay duration in div
-        let trackerDur = document.getElementById('duration');
-        let el2 = minutes + ' min ' + seconds + ' sec';
-        if (el2 !== undefined) {
-          trackerDur.innerHTML = '<p>' + el2 + '</p>';
-        }
-        // override distance if already existing
-        else {
-          while (trackerDur.firstChild) {
-            trackerDur.removeChild(trackerDur.firstChild);
-            trackerDur.innerHTML = '<p>' + el2 + '</p>';
-          }
-        }
-      } catch (error) {
-        console.log('Error:' + error);
-      }
-    }
-    doAjax();
-    //+++ THIS IS WHERE DURATION & DISTANCE ENDS
   });
-
   //+++ ROUTING MAP ENDS
 
   //+++ add eventListener for Technologiestiftung

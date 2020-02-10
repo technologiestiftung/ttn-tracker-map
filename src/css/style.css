@@ -14,7 +14,7 @@
 body { margin:0; padding:0; }
 
 html * {
-   font-size: 14px !important;
+   font-size: 1em !important;
    font-family: Helvetica,Arial,sans-serif !important;
    letter-spacing: 0.05em;
 }
@@ -22,9 +22,10 @@ html * {
 
 h1 {
     color: white;
-    font-size: 18px !important;
+    font-size: 1.2em !important;
     text-align: center;
 }
+
 
 #map {
     max-width: 80%;
@@ -37,6 +38,8 @@ h1 {
 .sidebar{
     height: 100%;
     width: 20%;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -55,8 +58,9 @@ h1 {
 .menuBtn {
     display: flex;
     justify-content: center;
+    font-size: 0.8em !important;
     max-width: 14em;
-    padding: 2em 2.5em; 
+    padding: 1.5em 2.5em; 
     border: none;
     border-radius: 5px;
     align-items: center;
@@ -64,7 +68,7 @@ h1 {
     background: white;
     box-shadow: rgba(44, 48, 59, 0.1) 0px 2px 3px 0px;
     transition: 0.3s;
-    margin-top: 4em;
+    margin-top: 3.5em;
 }
 
 .menuBtn:hover {
@@ -78,49 +82,48 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 2em;
+    margin-top: 1.5em;
 }
 
 
 #trackerInfo p {
     color: white;
-    font-size: 20px !important;
+    font-size: 1em !important;
     font-weight: bold;
     text-align: center;
 }
 
 #trackerInfo p#bike{
-    font-size: 34px !important;
+    font-size: 2.2em !important;
 }
 #trackerInfo p#highway{
-    font-size: 34px !important;
+    font-size: 2.2em !important;
 }
 
 #trackerInfo #duration p{
-    margin: -1.8em;
+    margin: -2em;
 }
 
 #trackerInfo #distance p{
-    margin: -1.8em;
+    margin: -2em;
 }
 
 .trackerDistance {
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 .trackerDuration {
-    margin-top: 4em;
+    margin-top: 1.5em;
 } 
 
 
 #navbar {
+    display: flex;
     position: fixed;
-    max-width: 70%;
     left: 0;
     right: 0;
     z-index: 30;
-    width: 90%;
-    display: flex;
+    max-width: 70%;
     align-content: space-around;
     vertical-align: top;
     }
@@ -144,8 +147,8 @@ h1 {
     padding: 0.4em 1.2em 0.4em 1.2em;
     border: none;
     border-radius: 5px;
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 0.8em !important;
+    /* font-weight: bold; */
     letter-spacing: 0.05em ;
     text-align: center;
     color: #fff;
@@ -172,7 +175,7 @@ h1 {
     }
 
 .mapboxgl-ctrl-scale{
-    max-width: 16em;
+    max-width: 14em;
 }
 
 
@@ -181,7 +184,8 @@ h1 {
     text-align: center;
     bottom: 0;
     height: 8%;
-    width: 22%;
+    width: 20%;
+    font-size: 0.8em !important;
     color: white;
 }
 
@@ -192,13 +196,14 @@ h1 {
 }
 
 .txt-rotate span{
-    font-size: 30px !important ;
+    font-size: 1.6em !important ;
     margin-bottom: 4em;
     letter-spacing: 0.05em;
 
 }
 
 #about{
+
     margin: auto;
 }
 #about:hover{
@@ -224,7 +229,7 @@ h1 {
 
 .mapboxgl-ctrl-scale {
     background-color: rgba(255, 255, 255, 0.5) ;
-    font-size: 12px;
+    font-size: 0.8em !important;
     border-width: medium 2px 2px;
     border-style: none solid solid;
     border-color: #333;

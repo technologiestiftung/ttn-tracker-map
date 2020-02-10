@@ -2,8 +2,8 @@
 .marker {
     background-image: url('/images/cropped-favicon.ico');
     background-size: cover;
-    width: 30px;
-    height: 30px;
+    width: 1.8em;
+    height: 1.8em;
     border-radius: 50%;
     cursor: pointer;
   }
@@ -21,7 +21,7 @@ color: white;
 }
 
 .mapboxgl-popup-content p {
-    font-size: 12px !important;
+    font-size: 0.8em !important;
 }
 
 .mapboxgl-popup-close-button {
